@@ -71,7 +71,7 @@ sess = tf.Session()
 
 sess.run(tf.global_variables_initializer())
 
-for i in range(201):
+for i in range(301):
         print('EPOCH', i)
         _, accuracy_val = sess.run([train_op, accuracy], feed_dict={x: images28, y: labels})
         if i % 10 == 0:
@@ -87,7 +87,7 @@ test_images28 = [transform.resize(image, (28, 28)) for image in test_images]
 test_images28 = rgb2gray(np.array(test_images28))
 
 # Pick 10 random images
-sample_indexes = random.sample(range(len(test_images28)), 10)
+sample_indexes = random.sample(range(len(test_images28)), 14)
 sample_images = [test_images28[i] for i in sample_indexes]
 sample_labels = [test_labels[i] for i in sample_indexes]
 
@@ -103,7 +103,7 @@ fig = plt.figure(figsize=(10, 10))
 for i in range(len(sample_images)):
     truth = sample_labels[i]
     prediction = predicted[i]
-    plt.subplot(5, 2,1+i)
+    plt.subplot(len(sample_images)/2+1, 2,1+i)
     plt.axis('off')
     color='green' if truth == prediction else 'red'
     plt.text(40, 10, "Truth:        {0}\nPrediction: {1}".format(truth, prediction),
